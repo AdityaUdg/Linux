@@ -1,0 +1,17 @@
+# Linux-Partition
+
+# First check the list of available partitions on your device
+
+df -h
+
+# Now suppose if we want to shrink ext4 partition which is located in sda3, we do the following steps
+  1. umount /dev/sda3 (unmounting the /home partition: make sure you're logged in as root)
+  2. e2fsck -f /dev/sda3 (do a filesystem check on the partition. If the filesystem check is successful proceed with next step)
+  3. resize2fs /dev/sda3 4G (specify the new size for the partition which is lesser then your current partition size)
+  4. fdisk /dev/sda (1. Delete the entry from the partition table d;
+                     2. Create new partition n;
+                     3. Specify the new size, same as the one mentioned before [4G]
+                     4. Save the changes and exit)
+# Make sure your first sector is same in the above process.
+5. mount /dev/sda3
+6. partprobe OR reboot (to update your partition table)
