@@ -13,5 +13,5 @@ df -h
                      3. Specify the new size, same as the one mentioned before [4G]
                      4. Save the changes and exit)
 # Make sure your first sector is same in the above process.
-5. mount /dev/sda3
-6. partprobe OR reboot (to update your partition table)
+5. partprobe OR reboot (to update your partition table)
+6. mount /dev/sda3
