@@ -1,0 +1,35 @@
+# EXTENDING BOOT PARTITION 
+
+# 1] First, create a new partition where you want to extend your /boot partition.
+Suppose we need to extend the partition to /dev/sdb1 . Do the following
+
+1.  fdisk /dev/sdb
+2. n (to create new partition)
+3. Specify the size of partition.
+4. w (to save the changes)
+5. partprobe or reboot to update kernel table
+6. mkfs.ext4 /dev/sdb1 (To format the partition)
+
+# Create a mount point for /dev/sdb1
+
+7. mkdir /tmp/boot2 (you can specify any name of your choice)
+8. mount /dev/sdb1 /tmp/boot2
+
+# Now copy all the files from /boot to /tmp/boot2
+
+9. cp -a /boot/* /tmp/boot2
+
+# Now add the entry to /etc/fstab for the partition /tmp/boot2
+
+10. umount /tmp/boot2
+11. blkid /dev/sdb1 (To get the UUId of /dev/sdb1)
+12. nano /etc/fstab
+13. [UUID of /dev/sdb1] /tmp/boot2 /ext4 defaults 0 0
+14. # Comment out or remove the entry of previous /boot partition 
+15. mount /dev/sdb1
+
+# Now install grub files on the new partition
+
+16. grub2-install /dev/sdb
+17. grub2-mkconfig -o /tmp/boot2/grub2/grub.cfg
+18. reboot
