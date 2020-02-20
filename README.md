@@ -5,4 +5,4 @@
 
 # Network Pentesting - Beginners to Advanced
 
-Here, Guide and notes for Network Pentesting from complete Beginner to Advanced level.
+ Notes for Network Pentesting, from complete Beginner to Advanced level.
